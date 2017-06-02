@@ -12,9 +12,11 @@ import me.cafecode.android.newspaper.data.remote.NewsRemoteData;
 @Module
 public class NewsRepositoryModule {
 
+    private static final String BASE_URL = "https://newsapi.org/v1/";
+
     @Provides
     NewsRemoteData provideNewsRemoteData() {
-        return new NewsRemoteData();
+        return new NewsRemoteData(BASE_URL);
     }
 
 }
