@@ -8,7 +8,7 @@ import me.cafecode.android.newspaper.injection.AppModule;
  * Email: natthawut1991@gmail.com
  */
 
-@Component(modules = {AppModule.class})
+@Component(modules = {NewsRepositoryModule.class, AppModule.class})
 public interface NewsRepositoryComponent {
 
     NewsRepository getNewsRepository();
