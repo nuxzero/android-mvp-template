@@ -19,6 +19,19 @@ android {
     }
 }
 
+// Share java code and resources
+android.sourceSets {
+    test {
+        java.srcDirs += "$projectDir/src/testShared/java"
+        resources.srcDirs += "$projectDir/src/testShared/resources"
+    }
+
+    androidTest {
+        java.srcDirs += "$projectDir/src/testShared/java"
+        resources.srcDirs += "$projectDir/src/testShared/resources"
+    }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -27,12 +40,16 @@ dependencies {
     compile "com.android.support:support-v4:$rootProject.ext.androidSupportVersion"
     compile "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
     compile "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
+    compile "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxandroidVersion"
+    compile "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjavaVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.retrofitAdapterRxjavaVersion"
 
     compile "com.google.dagger:dagger:$rootProject.ext.daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
 
     testCompile "junit:junit:$rootProject.ext.junitVersion"
     testCompile "org.mockito:mockito-core:$rootProject.ext.mockitoVersion"
+    testCompile "com.squareup.okhttp3:mockwebserver:$rootProject.ext.mockWebserverVersion"
 
     androidTestCompile("com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoVersion", {
         exclude group: 'com.android.support', module: 'support-annotations'
