@@ -3,19 +3,24 @@ package me.cafecode.android.newspaper.newses;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
 
-import me.cafecode.android.newspaper.data.models.News;
+import javax.inject.Inject;
+
+import me.cafecode.android.newspaper.NewspaperApplication;
 import me.cafecode.android.newspaper.R;
-import me.cafecode.android.newspaper.data.NewsRepository;
+import me.cafecode.android.newspaper.data.models.News;
 
 public class NewsesFragment extends Fragment implements NewsesContract.View {
 
-    private NewsesPresenter mPresenter;
+    private static final String TAG = NewsesFragment.class.getSimpleName();
+    @Inject
+    NewsesPresenter presenter;
 
     public NewsesFragment() {
         // Required empty public constructor
@@ -29,7 +34,13 @@ public class NewsesFragment extends Fragment implements NewsesContract.View {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mPresenter = new NewsesPresenter(new NewsRepository(), this);
+        // Inject this fragment
+        DaggerNewsesComponent.builder()
+                .newsRepositoryComponent(((NewspaperApplication) getActivity().getApplication()).getRepositoryComponent())
+                .newsesPresenterModule(new NewsesPresenterModule(this))
+                .build()
+                .inject(this);
+
     }
 
     @Override
@@ -43,17 +54,17 @@ public class NewsesFragment extends Fragment implements NewsesContract.View {
     public void onResume() {
         super.onResume();
 
-        mPresenter.onStart();
+        presenter.onStart();
     }
 
     @Override
     public void showProgressView(boolean isShow) {
-
+        Log.i(TAG, "showProgressView()");
     }
 
     @Override
     public void showNewses(List<News> newses) {
-
+        Log.i(TAG, "showNewses()");
     }
 
 }

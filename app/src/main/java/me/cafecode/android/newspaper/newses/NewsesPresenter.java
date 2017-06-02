@@ -2,9 +2,11 @@ package me.cafecode.android.newspaper.newses;
 
 import java.util.List;
 
-import me.cafecode.android.newspaper.data.models.News;
+import javax.inject.Inject;
+
 import me.cafecode.android.newspaper.data.LoadNewsesCallback;
-import me.cafecode.android.newspaper.data.NewsRepositoryDataSource;
+import me.cafecode.android.newspaper.data.NewsRepository;
+import me.cafecode.android.newspaper.data.models.News;
 
 /**
  * Created by Natthawut Hemathulin on 5/31/2017 AD.
@@ -15,9 +17,10 @@ public class NewsesPresenter implements NewsesContract.Presenter {
 
     private NewsesContract.View mView;
 
-    private NewsRepositoryDataSource mRepository;
+    private NewsRepository mRepository;
 
-    public NewsesPresenter(NewsRepositoryDataSource repository, NewsesContract.View view) {
+    @Inject
+    public NewsesPresenter(NewsRepository repository, NewsesContract.View view) {
         mRepository = repository;
         mView = view;
     }

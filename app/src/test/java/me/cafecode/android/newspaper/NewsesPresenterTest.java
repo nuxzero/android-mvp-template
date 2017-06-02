@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import me.cafecode.android.newspaper.data.LoadNewsesCallback;
-import me.cafecode.android.newspaper.data.NewsRepositoryDataSource;
+import me.cafecode.android.newspaper.data.NewsRepository;
 import me.cafecode.android.newspaper.data.models.News;
 import me.cafecode.android.newspaper.newses.NewsesContract;
 import me.cafecode.android.newspaper.newses.NewsesPresenter;
@@ -30,7 +30,7 @@ public class NewsesPresenterTest {
     private NewsesPresenter mPresenter;
 
     @Mock
-    NewsRepositoryDataSource mRepository;
+    NewsRepository mRepository;
 
     @Mock
     NewsesContract.View mView;
