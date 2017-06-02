@@ -4,8 +4,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import me.cafecode.android.newspaper.data.local.NewsLocalDataSource;
 import me.cafecode.android.newspaper.data.models.News;
-import me.cafecode.android.newspaper.data.remote.NewsRemoteData;
+import me.cafecode.android.newspaper.data.remote.NewsRemoteDataSource;
 
 /**
  * Created by Natthawut Hemathulin on 5/31/2017 AD.
@@ -14,11 +15,13 @@ import me.cafecode.android.newspaper.data.remote.NewsRemoteData;
 
 public class NewsRepository implements NewsRepositoryDataSource {
 
-    private NewsRemoteData mRemoteData;
+    private NewsRemoteDataSource mRemoteData;
+    private NewsLocalDataSource mLocalData;
 
     @Inject
-    public NewsRepository(NewsRemoteData remoteData) {
+    public NewsRepository(NewsRemoteDataSource remoteData, NewsLocalDataSource localData) {
         mRemoteData = remoteData;
+        mLocalData = localData;
     }
 
     @Override

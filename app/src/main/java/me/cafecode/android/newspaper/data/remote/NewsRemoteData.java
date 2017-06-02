@@ -8,7 +8,6 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import me.cafecode.android.newspaper.data.LoadNewsesCallback;
-import me.cafecode.android.newspaper.data.NewsRepositoryDataSource;
 import me.cafecode.android.newspaper.data.NewsesResponse;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -19,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by Natthawut Hemathulin on 6/2/2017 AD.
  * Email: natthawut1991@gmail.com
  */
-public class NewsRemoteData implements NewsRepositoryDataSource {
+public class NewsRemoteData implements NewsRemoteDataSource {
 
     private final NewsRemoteService mApiService;
 

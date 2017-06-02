@@ -7,6 +7,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import io.reactivex.subscribers.TestSubscriber;
+import me.cafecode.android.newspaper.data.local.NewsLocalDataSource;
+import me.cafecode.android.newspaper.data.remote.NewsRemoteDataSource;
 import utils.ReadJsonUtils;
 
 import static junit.framework.Assert.assertNotNull;
@@ -28,12 +30,15 @@ public class NewsRepositoryTest {
     private NewsRepository mRepository;
 
     @Mock
-    private NewsRepositoryDataSource mRepositoryDataSource;
+    private NewsRemoteDataSource mRemoteDataSource;
+
+    @Mock
+    private NewsLocalDataSource mLocalDataSource;
 
     @Before
     public void setUp() {
 
-//        mRepository = new NewsRepository(mRepositoryDataSource);
+        mRepository = new NewsRepository(mRemoteDataSource, mLocalDataSource);
 
     }
 
