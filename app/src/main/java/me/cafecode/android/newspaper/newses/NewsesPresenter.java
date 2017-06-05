@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import me.cafecode.android.newspaper.data.LoadNewsesCallback;
+import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 import me.cafecode.android.newspaper.data.NewsRepository;
 import me.cafecode.android.newspaper.data.models.News;
 
@@ -33,13 +35,28 @@ public class NewsesPresenter implements NewsesContract.Presenter {
     @Override
     public void loadNewses() {
         mView.showProgressView(true);
-        mRepository.loadNewses(new LoadNewsesCallback() {
-            @Override
-            public void onLoadNewsesFinished(List<News> newses) {
-                mView.showProgressView(false);
-                mView.showNewses(newses);
-            }
-        });
+        mRepository.loadNewses()
+                .subscribe(new Observer<List<News>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull List<News> newses) {
+                        mView.showNewses(newses);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        mView.showProgressView(false);
+                    }
+                });
     }
 
 }

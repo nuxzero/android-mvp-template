@@ -16,7 +16,7 @@ public class NewsesResponse {
     private String status;
     private String source;
     private String sortBy;
-    @SerializedName("newses")
+    @SerializedName("articles")
     private List<News> newses;
 
     public String getStatus() {

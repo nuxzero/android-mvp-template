@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
 import me.cafecode.android.newspaper.data.local.NewsLocalDataSource;
 import me.cafecode.android.newspaper.data.models.News;
 import me.cafecode.android.newspaper.data.remote.NewsRemoteDataSource;
@@ -24,14 +25,9 @@ public class NewsRepository implements NewsRepositoryDataSource {
         mLocalData = localData;
     }
 
+
     @Override
-    public void loadNewses(LoadNewsesCallback callback) {
-        mRemoteData.loadNewses(new LoadNewsesCallback() {
-            @Override
-            public void onLoadNewsesFinished(List<News> newses) {
-
-            }
-        });
+    public Observable<List<News>> loadNewses() {
+        return mRemoteData.loadNewses();
     }
-
 }

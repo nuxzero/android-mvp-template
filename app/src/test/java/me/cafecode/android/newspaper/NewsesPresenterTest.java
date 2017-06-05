@@ -17,7 +17,9 @@ import me.cafecode.android.newspaper.data.models.News;
 import me.cafecode.android.newspaper.newses.NewsesContract;
 import me.cafecode.android.newspaper.newses.NewsesPresenter;
 
+import static io.reactivex.Observable.just;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Natthawut Hemathulin on 5/31/2017 AD.
@@ -58,15 +60,12 @@ public class NewsesPresenterTest {
     public void whenLoadNewsesFinishedThenShowNewses() {
         // Give
         List<News> newses = Arrays.asList(new News(), new News(), new News());
+        when(mRepository.loadNewses()).thenReturn(just(newses));
 
         // When
         mPresenter.loadNewses();
 
         verify(mView).showProgressView(true);
-
-        // Callback
-        verify(mRepository).loadNewses(loadNewsesCallbackCaptor.capture());
-        loadNewsesCallbackCaptor.getValue().onLoadNewsesFinished(newses);
 
         // Then
         verify(mView).showProgressView(false);

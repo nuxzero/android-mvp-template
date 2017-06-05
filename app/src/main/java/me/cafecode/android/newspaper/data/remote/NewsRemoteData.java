@@ -3,12 +3,15 @@ package me.cafecode.android.newspaper.data.remote;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
+import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.observers.DisposableObserver;
-import io.reactivex.schedulers.Schedulers;
-import me.cafecode.android.newspaper.data.LoadNewsesCallback;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import me.cafecode.android.newspaper.data.NewsesResponse;
+import me.cafecode.android.newspaper.data.models.News;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -40,24 +43,12 @@ public class NewsRemoteData implements NewsRemoteDataSource {
     }
 
     @Override
-    public void loadNewses(LoadNewsesCallback callback) {
-        mApiService.getNewses()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<NewsesResponse>() {
+    public Observable<List<News>> loadNewses() {
+        return mApiService.getNewses()
+                .flatMap(new Function<NewsesResponse, ObservableSource<List<News>>>() {
                     @Override
-                    public void onNext(@NonNull NewsesResponse newsesResponse) {
-
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
+                    public ObservableSource<List<News>> apply(@NonNull NewsesResponse newsesResponse) throws Exception {
+                        return Observable.just(newsesResponse.getNewses());
                     }
                 });
     }
