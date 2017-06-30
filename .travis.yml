@@ -1,15 +1,26 @@
-language: android
-jdk: oraclejdk8
-sudo: true
-android:
-  components:
-    - tools
-    - platform-tools
-    - tools
-    - build-tool-25.0.3
-    - android-25
-    - sys-img-armeabi-v7a-android-25
-    - extra-google-google_play_services
-    - extra-android-support
-    - extra-google-m2repository
-    - extra-android-m2repository
+{
+  "language": "android",
+  "jdk": "oraclejdk8",
+  "cache": false,
+  "sudo": true,
+  "android": {
+    "components": [
+      "platform-tools",
+      "tools",
+      "build-tools-$ANDROID_BUILD_TOOLS_VERSION",
+      "android-$ANDROID_API_LEVEL",
+      "extra-google-google_play_services",
+      "extra-android-support",
+      "extra-google-m2repository",
+      "extra-android-m2repository"
+    ]
+  },
+  "script": [
+    "./gradlew assembleObaGoogleDebug assembleObaAmazonDebug -PdisablePreDex"
+  ],
+  "global_env": "ANDROID_API_LEVEL=25 ANDROID_BUILD_TOOLS_VERSION=25.0.3 ADB_INSTALL_TIMEOUT=20",
+  "group": "stable",
+  "dist": "precise",
+  "os": "linux"
+}
+
