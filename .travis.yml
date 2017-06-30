@@ -6,3 +6,4 @@ android:
     - tools
     - build-tool-25.0.3
     - android-25
+    - sys-img-armeabi-v7a-android-25
