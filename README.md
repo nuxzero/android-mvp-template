@@ -1,3 +1,1 @@
-# android-mvp-template
-
-https://travis-ci.org/nuxZERO/android-mvp-template.svg?branch=master
+# Android MVP Template ![Travis-CI build status](https://travis-ci.org/nuxZERO/android-mvp-template.svg?branch=master)
