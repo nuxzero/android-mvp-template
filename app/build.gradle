@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -16,6 +19,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -44,8 +51,8 @@ dependencies {
     compile "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjavaVersion"
     compile "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.retrofitAdapterRxjavaVersion"
     compile "com.google.dagger:dagger:$rootProject.ext.daggerVersion"
-    compile "android.arch.persistence.room:runtime:$rootProject.archRoomVersion"
-    compile "android.arch.persistence.room:rxjava2:$rootProject.archRoomVersion"
+//    compile "android.arch.persistence.room:runtime:$rootProject.archRoomVersion"
+//    compile "android.arch.persistence.room:rxjava2:$rootProject.archRoomVersion"
     compile "com.google.code.gson:gson:$rootProject.gsonVersion"
 
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"

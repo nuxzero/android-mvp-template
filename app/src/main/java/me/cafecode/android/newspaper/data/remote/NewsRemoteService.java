@@ -1,7 +1,7 @@
 package me.cafecode.android.newspaper.data.remote;
 
+import io.reactivex.Observable;
 import me.cafecode.android.newspaper.data.NewsesResponse;
-import retrofit2.Call;
 import retrofit2.http.GET;
 
 /**
@@ -11,7 +11,7 @@ import retrofit2.http.GET;
 
 public interface NewsRemoteService {
 
-    @GET("articles?source=techcrunch&sortBy=latest&apiKey=[API_KEY]")
-    Call<NewsesResponse> getNewses();
+    @GET("articles?source=techcrunch&sortBy=latest&apiKey=691700b86fee41c58f6cee530e91623b")
+    Observable<NewsesResponse> getNewses();
 
 }
