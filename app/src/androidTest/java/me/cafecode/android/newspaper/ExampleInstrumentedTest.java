@@ -23,4 +23,9 @@ public class ExampleInstrumentedTest {
 
         assertEquals("me.cafecode.android.newspaper", appContext.getPackageName());
     }
+
+    @Test
+    public void test() {
+        assertTrue(false);
+    }
 }
