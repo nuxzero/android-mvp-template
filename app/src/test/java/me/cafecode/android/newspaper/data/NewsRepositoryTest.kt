@@ -37,7 +37,7 @@ class NewsRepositoryTest {
     @Before
     fun setUp() {
 
-        mRepository = NewsRepository(mRemoteDataSource, mLocalDataSource)
+        mRepository = NewsRepository(mRemoteDataSource, mLocalDataSource!!)
 
     }
 

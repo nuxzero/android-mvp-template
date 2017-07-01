@@ -8,7 +8,6 @@ import java.util.List;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import me.cafecode.android.newspaper.data.NewsesResponse;
 import me.cafecode.android.newspaper.data.models.News;
