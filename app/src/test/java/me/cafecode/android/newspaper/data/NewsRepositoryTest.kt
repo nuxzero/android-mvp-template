@@ -11,6 +11,7 @@ import io.reactivex.observers.TestObserver
 import me.cafecode.android.newspaper.data.local.NewsLocalDataSource
 import me.cafecode.android.newspaper.data.models.News
 import me.cafecode.android.newspaper.data.remote.NewsRemoteDataSource
+import me.cafecode.android.newspaper.data.remote.NewsesResponse
 import utils.ReadJsonUtils
 
 import org.mockito.Mockito.`when`
