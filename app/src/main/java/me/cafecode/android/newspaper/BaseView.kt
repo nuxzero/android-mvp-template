@@ -1,5 +1,7 @@
 package me.cafecode.android.newspaper
 
-/**
- * Created by Nux on 7/3/2017 AD.
- */
+interface BaseView<T> {
+
+    fun setPresenter(presenter: T)
+
+}

@@ -1,5 +1,10 @@
 package me.cafecode.android.newspaper.data
 
-/**
- * Created by Nux on 7/2/2017 AD.
- */
+import io.reactivex.Observable
+import me.cafecode.android.newspaper.data.models.News
+
+interface NewsRepositoryDataSource {
+
+    fun loadNewses() : Observable<List<News>>
+
+}

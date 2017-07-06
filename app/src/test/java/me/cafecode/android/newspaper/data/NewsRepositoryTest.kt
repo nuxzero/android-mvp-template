@@ -27,18 +27,18 @@ class NewsRepositoryTest {
     private val NEWSES_RESPONSE = ReadJsonUtils()
             .getJsonToMock("get_newses.json", NewsesResponse::class.java)
 
-    private var mRepository: NewsRepository? = null
+    lateinit var mRepository: NewsRepository
 
     @Mock
-    private val mRemoteDataSource: NewsRemoteDataSource? = null
+    lateinit var mRemoteDataSource: NewsRemoteDataSource
 
     @Mock
-    private val mLocalDataSource: NewsLocalDataSource? = null
+    lateinit var mLocalDataSource: NewsLocalDataSource
 
     @Before
     fun setUp() {
 
-        mRepository = NewsRepository(mRemoteDataSource, mLocalDataSource!!)
+        mRepository = NewsRepository(mRemoteDataSource, mLocalDataSource)
 
     }
 
@@ -47,11 +47,11 @@ class NewsRepositoryTest {
 
         // Give
         val NEWSES = NEWSES_RESPONSE.newses
-        `when`(mRemoteDataSource!!.loadNewses()).thenReturn(Observable.just(NEWSES))
+        `when`(mRemoteDataSource.loadNewses()).thenReturn(Observable.just(NEWSES))
 
         // When
         val testObserver = TestObserver<List<News>>()
-        mRepository!!.loadNewses().subscribe(testObserver)
+        mRepository.loadNewses().subscribe(testObserver)
 
         // Then
         testObserver.assertValue(NEWSES)

@@ -1,5 +1,22 @@
 package me.cafecode.android.newspaper.newses
 
-/**
- * Created by Nux on 7/3/2017 AD.
- */
+import me.cafecode.android.newspaper.BasePresenter
+import me.cafecode.android.newspaper.BaseView
+import me.cafecode.android.newspaper.data.models.News
+
+interface NewsesContract {
+
+    interface View : BaseView<Presenter> {
+
+        fun showProgressView(isShow: Boolean)
+
+        fun showNewses(newses: List<News>)
+
+    }
+
+    interface Presenter : BasePresenter {
+
+        fun loadNewses()
+
+    }
+}

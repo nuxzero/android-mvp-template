@@ -1,5 +1,21 @@
 package me.cafecode.android.newspaper
 
-/**
- * Created by Nux on 7/2/2017 AD.
- */
+import android.app.Application
+import me.cafecode.android.newspaper.data.DaggerNewsRepositoryComponent
+import me.cafecode.android.newspaper.data.NewsRepositoryComponent
+import me.cafecode.android.newspaper.data.NewsRepositoryModule
+
+class NewspaperApplication : Application() {
+
+    lateinit var newsRepositoryComponent: NewsRepositoryComponent
+
+    override fun onCreate() {
+        super.onCreate()
+
+        //TODO: Inject here
+        newsRepositoryComponent = DaggerNewsRepositoryComponent.builder()
+                .newsRepositoryModule(NewsRepositoryModule())
+                .build()
+    }
+
+}

@@ -20,13 +20,13 @@ import java.util.*
 @RunWith(MockitoJUnitRunner::class)
 class NewsesPresenterTest {
 
-    private var mPresenter: NewsesPresenter? = null
+    lateinit var mPresenter: NewsesPresenter
 
     @Mock
-    val mRepository: NewsRepository? = null
+    lateinit var mRepository: NewsRepository
 
     @Mock
-    val mView: NewsesContract.View? = null
+    lateinit var mView: NewsesContract.View
 
     @Captor
     var mLoadNewsesCallbackCaptor: ArgumentCaptor<LoadNewsesCallback>? = null
@@ -41,7 +41,7 @@ class NewsesPresenterTest {
         // Give
 
         // When
-        mPresenter!!.onStart()
+        mPresenter.onStart()
 
         // Then
         verify(mView)!!.showProgressView(true)
@@ -51,12 +51,10 @@ class NewsesPresenterTest {
     fun whenLoadNewsesFinishedThenShowNewses() {
         // Give
         val newses = Arrays.asList(News(), News(), News())
-        Mockito.`when`(mRepository!!.loadNewses()).thenReturn(Observable.just(newses))
+        Mockito.`when`(mRepository.loadNewses()).thenReturn(Observable.just(newses))
 
         // When
-        mPresenter!!.loadNewses()
-
-        verify(mView)!!.showProgressView(true)
+        mPresenter.loadNewses()
 
         // Then
         verify(mView)!!.showProgressView(false)

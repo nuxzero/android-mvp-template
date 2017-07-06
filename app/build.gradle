@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -39,6 +40,10 @@ android.sourceSets {
     }
 }
 
+kapt {
+    generateStubs = true
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -50,12 +55,13 @@ dependencies {
     compile "io.reactivex.rxjava2:rxandroid:$rxandroidVersion"
     compile "io.reactivex.rxjava2:rxjava:$rxjavaVersion"
     compile "com.squareup.retrofit2:adapter-rxjava2:$retrofitAdapterRxjavaVersion"
-    compile "com.google.dagger:dagger:$daggerVersion"
-//    compile "android.arch.persistence.room:runtime:$rootProject.archRoomVersion"
-//    compile "android.arch.persistence.room:rxjava2:$rootProject.archRoomVersion"
     compile "com.google.code.gson:gson:$gsonVersion"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    compile "com.google.dagger:dagger:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    provided 'javax.annotation:jsr250-api:1.0'
 
-    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+//    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
     annotationProcessor "android.arch.persistence.room:compiler:$archRoomVersion"
 
     testCompile "junit:junit:$junitVersion"
@@ -67,7 +73,6 @@ dependencies {
     androidTestCompile("com.android.support.test.espresso:espresso-core:$espressoVersion", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
 }
 repositories {

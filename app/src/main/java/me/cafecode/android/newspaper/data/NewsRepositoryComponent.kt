@@ -1,5 +1,10 @@
 package me.cafecode.android.newspaper.data
 
-/**
- * Created by Nux on 7/5/2017 AD.
- */
+import dagger.Component
+
+@Component(modules = arrayOf(NewsRepositoryModule::class))
+interface NewsRepositoryComponent {
+
+    fun getNewsRepository() : NewsRepository
+
+}
