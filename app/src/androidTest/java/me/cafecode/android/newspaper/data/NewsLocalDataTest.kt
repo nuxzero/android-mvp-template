@@ -49,4 +49,15 @@ class NewsLocalDataTest {
         Assert.assertEquals(newsesResponse.newses.size, actualNewses.size)
     }
 
+    @Test
+    fun saveNewses_whenSaveNewsesThenSaveNewsesToLocalDatabase() {
+        // Give
+
+        // When
+        localData.saveNewses(newsesResponse.newses)
+
+        // Then
+        Assert.assertEquals(newsesResponse.newses.size, database.newsDao().news.size)
+    }
+
 }

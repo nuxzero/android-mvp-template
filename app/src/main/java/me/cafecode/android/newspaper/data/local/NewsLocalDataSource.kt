@@ -6,4 +6,6 @@ interface NewsLocalDataSource {
 
     fun loadNewses() : List<News>
 
+    fun saveNewses(newses: List<News>)
+
 }

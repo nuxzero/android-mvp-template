@@ -8,16 +8,12 @@ import java.util.List;
 
 import me.cafecode.android.newspaper.data.models.News;
 
-/**
- * Created by Nux on 7/11/2017 AD.
- */
-
 @Dao
 public interface NewsDao {
     @Query("SELECT * FROM news")
-    public List<News> getNews();
+    List<News> getNews();
 
     @Insert
-    public void saveNews(List<News> news);
+    void saveNews(List<News> news);
 
 }
