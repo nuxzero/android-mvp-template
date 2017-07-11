@@ -4,7 +4,7 @@ buildscript {
     ext {
         compileSdkVersion = 26
         buildToolsVersion = "26.0.0"
-        minSdkVersion = 25
+        minSdkVersion = 22
         targetSdkVersion = 26
         espressoVersion = "2.2.2"
         androidSupportVersion = "26.0.0-beta2"
