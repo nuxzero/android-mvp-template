@@ -1,10 +1,8 @@
 package me.cafecode.android.newspaper.data
 
 import io.reactivex.Observable
-import me.cafecode.android.newspaper.data.local.NewsLocalData
 import me.cafecode.android.newspaper.data.local.NewsLocalDataSource
 import me.cafecode.android.newspaper.data.models.News
-import me.cafecode.android.newspaper.data.remote.NewsRemoteData
 import me.cafecode.android.newspaper.data.remote.NewsRemoteDataSource
 import javax.inject.Inject
 

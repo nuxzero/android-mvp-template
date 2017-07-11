@@ -6,4 +6,6 @@ import me.cafecode.android.newspaper.data.models.News
 data class NewsesResponse(var status: String,
                           var source: String,
                           var sortBy: String,
-                          @SerializedName("articles") var newses: List<News>)
+                          @SerializedName("articles") var newses: List<News>) {
+
+}

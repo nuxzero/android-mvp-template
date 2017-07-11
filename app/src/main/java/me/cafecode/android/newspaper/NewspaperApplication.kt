@@ -14,7 +14,7 @@ class NewspaperApplication : Application() {
 
         //TODO: Inject here
         newsRepositoryComponent = DaggerNewsRepositoryComponent.builder()
-                .newsRepositoryModule(NewsRepositoryModule())
+                .newsRepositoryModule(NewsRepositoryModule(this.applicationContext))
                 .build()
     }
 
