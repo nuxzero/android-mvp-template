@@ -1,4 +1,4 @@
-package me.cafecode.android.newspaper
+package me.cafecode.android.newspaper.data
 
 import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
