@@ -17,6 +17,13 @@ NewsLocalDataSource)
 
     override fun loadNewses(): Observable<List<News>> {
         return mRemoteData.loadNewses()
+                .flatMap { newses ->
+                    Observable.fromArray(newses)
+                            .doOnNext { nextNewses -> mLocalData.saveNewses(nextNewses) }
+                }
+                .doOnComplete({
+
+                })
     }
 
 }

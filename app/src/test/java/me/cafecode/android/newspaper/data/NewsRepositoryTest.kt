@@ -15,6 +15,7 @@ import me.cafecode.android.newspaper.data.remote.NewsesResponse
 import utils.ReadJsonUtils
 
 import org.mockito.Mockito.`when`
+import org.mockito.Mockito.verify
 
 /**
  * Created by Natthawut Hemathulin on 6/2/2017 AD.
@@ -54,6 +55,8 @@ class NewsRepositoryTest {
         mRepository.loadNewses().subscribe(testObserver)
 
         // Then
+        verify(mRemoteDataSource).loadNewses()
+        verify(mLocalDataSource).saveNewses(NEWSES)
         testObserver.assertValue(NEWSES)
     }
 
