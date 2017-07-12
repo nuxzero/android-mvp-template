@@ -5,8 +5,9 @@ import me.cafecode.android.newspaper.data.local.NewsLocalDataSource
 import me.cafecode.android.newspaper.data.models.News
 import me.cafecode.android.newspaper.data.remote.NewsRemoteDataSource
 import javax.inject.Inject
+import javax.inject.Singleton
 
-open class NewsRepository @Inject constructor(remoteData: NewsRemoteDataSource, localData:
+@Singleton open class NewsRepository @Inject constructor(remoteData: NewsRemoteDataSource, localData:
 NewsLocalDataSource)
     : NewsRepositoryDataSource {
 

@@ -9,6 +9,7 @@ import me.cafecode.android.newspaper.data.local.NewsLocalData
 import me.cafecode.android.newspaper.data.local.NewsLocalDataSource
 import me.cafecode.android.newspaper.data.remote.NewsRemoteData
 import me.cafecode.android.newspaper.data.remote.NewsRemoteDataSource
+import javax.inject.Singleton
 
 @Module
 class NewsRepositoryModule(val context: Context) {
@@ -17,11 +18,13 @@ class NewsRepositoryModule(val context: Context) {
         val BASE_URL = "https://newsapi.org/v1/"
     }
 
+    @Singleton
     @Provides
     fun provideNewsRemoteData(): NewsRemoteDataSource {
         return NewsRemoteData(BASE_URL)
     }
 
+    @Singleton
     @Provides
     fun provideNewsLocalData(): NewsLocalDataSource {
         val database: LocalDatabase = Room.databaseBuilder(context, LocalDatabase::class.java,
