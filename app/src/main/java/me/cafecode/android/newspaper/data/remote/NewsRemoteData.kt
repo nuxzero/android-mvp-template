@@ -2,6 +2,8 @@ package me.cafecode.android.newspaper.data.remote
 
 import com.google.gson.GsonBuilder
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import me.cafecode.android.newspaper.data.models.News
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -31,6 +33,8 @@ class NewsRemoteData(baseUrl: String) : NewsRemoteDataSource {
 
     override fun loadNewses(): Observable<List<News>> {
         return mApiService.getNewses()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .flatMap { newsesResponse -> Observable.just(newsesResponse.newses) }
     }
 

@@ -12,6 +12,8 @@ interface NewsesContract {
 
         fun showNewses(newses: List<News>)
 
+        fun showErrorMessage(message: String)
+
     }
 
     interface Presenter : BasePresenter {

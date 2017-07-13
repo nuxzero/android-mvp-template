@@ -1,7 +1,6 @@
 package me.cafecode.android.newspaper.newses
 
 import me.cafecode.android.newspaper.data.NewsRepository
-import me.cafecode.android.newspaper.data.models.News
 import javax.inject.Inject
 
 class NewsesPresenter @Inject constructor(val repository: NewsRepository, val view: NewsesContract
@@ -14,15 +13,23 @@ class NewsesPresenter @Inject constructor(val repository: NewsRepository, val vi
 
     override fun onStart() {
         view.showProgressView(true)
+        loadNewses()
     }
 
     override fun loadNewses() {
-        view.showProgressView(false)
+        view.showProgressView(true)
 
         repository.loadNewses()
                 .subscribe(
-                        { newses: List<News> -> view.showNewses(newses) },
-                        { view.showProgressView(false) }
+                        { newses ->
+                            view.showNewses(newses)
+                            view.showProgressView(false)
+                        },
+                        { error ->
+                            error.printStackTrace()
+                            view.showProgressView(false)
+                            view.showErrorMessage(error.message!!)
+                        }
                 )
     }
 

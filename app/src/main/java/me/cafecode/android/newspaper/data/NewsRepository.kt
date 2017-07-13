@@ -1,5 +1,6 @@
 package me.cafecode.android.newspaper.data
 
+import android.util.Log
 import io.reactivex.Observable
 import me.cafecode.android.newspaper.data.local.NewsLocalDataSource
 import me.cafecode.android.newspaper.data.models.News
@@ -15,15 +16,17 @@ NewsLocalDataSource)
 
     var mLocalData = localData
 
+    val TAG = "NewsRepository"
+
     override fun loadNewses(): Observable<List<News>> {
         return mRemoteData.loadNewses()
                 .flatMap { newses ->
                     Observable.fromArray(newses)
-                            .doOnNext { nextNewses -> mLocalData.saveNewses(nextNewses) }
+                            .doOnNext { nextNewses ->
+                                mLocalData.saveNewses(nextNewses)
+                            }
                 }
-                .doOnComplete({
-
-                })
+//                .doOnError({ error -> Log.e(TAG, error.message) })
     }
 
 }
