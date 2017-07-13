@@ -3,7 +3,7 @@ package me.cafecode.android.newspaper
 import io.reactivex.Observable
 import me.cafecode.android.newspaper.data.LoadNewsesCallback
 import me.cafecode.android.newspaper.data.NewsRepository
-import me.cafecode.android.newspaper.data.models.News
+import me.cafecode.android.newspaper.data.remote.NewsesResponse
 import me.cafecode.android.newspaper.newses.NewsesContract
 import me.cafecode.android.newspaper.newses.NewsesPresenter
 import org.junit.Before
@@ -15,10 +15,13 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
-import java.util.*
+import utils.ReadJsonUtils
 
 @RunWith(MockitoJUnitRunner::class)
 class NewsesPresenterTest {
+
+    private val NEWSES_RESPONSE = ReadJsonUtils()
+            .getJsonToMock("get_newses.json", NewsesResponse::class.java)
 
     lateinit var mPresenter: NewsesPresenter
 
@@ -39,6 +42,8 @@ class NewsesPresenterTest {
     @Test
     fun onStart_whenPresenterStartWithoutCachedThenShowProgressView() {
         // Give
+        Mockito.`when`(mRepository.loadNewses())
+                .thenReturn(Observable.just(NEWSES_RESPONSE.newses))
 
         // When
         mPresenter.onStart()
@@ -50,8 +55,9 @@ class NewsesPresenterTest {
     @Test
     fun whenLoadNewsesFinishedThenShowNewses() {
         // Give
-        val newses = Arrays.asList(News(), News(), News())
-        Mockito.`when`(mRepository.loadNewses()).thenReturn(Observable.just(newses))
+        val newses = NEWSES_RESPONSE.newses
+        Mockito.`when`(mRepository.loadNewses())
+                .thenReturn(Observable.just(newses))
 
         // When
         mPresenter.loadNewses()

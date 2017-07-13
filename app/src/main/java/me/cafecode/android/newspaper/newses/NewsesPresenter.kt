@@ -12,7 +12,6 @@ class NewsesPresenter @Inject constructor(val repository: NewsRepository, val vi
     }
 
     override fun onStart() {
-        view.showProgressView(true)
         loadNewses()
     }
 
