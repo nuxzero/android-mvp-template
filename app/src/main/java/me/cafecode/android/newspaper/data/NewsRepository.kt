@@ -1,7 +1,8 @@
 package me.cafecode.android.newspaper.data
 
-import android.util.Log
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import me.cafecode.android.newspaper.data.local.NewsLocalDataSource
 import me.cafecode.android.newspaper.data.models.News
 import me.cafecode.android.newspaper.data.remote.NewsRemoteDataSource
@@ -16,8 +17,6 @@ NewsLocalDataSource)
 
     var mLocalData = localData
 
-    val TAG = "NewsRepository"
-
     override fun loadNewses(): Observable<List<News>> {
         return mRemoteData.loadNewses()
                 .flatMap { newses ->
@@ -26,7 +25,6 @@ NewsLocalDataSource)
                                 mLocalData.saveNewses(nextNewses)
                             }
                 }
-//                .doOnError({ error -> Log.e(TAG, error.message) })
     }
 
 }

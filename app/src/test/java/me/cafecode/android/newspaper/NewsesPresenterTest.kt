@@ -1,21 +1,22 @@
 package me.cafecode.android.newspaper
 
 import io.reactivex.Observable
-import me.cafecode.android.newspaper.data.LoadNewsesCallback
 import me.cafecode.android.newspaper.data.NewsRepository
 import me.cafecode.android.newspaper.data.remote.NewsesResponse
 import me.cafecode.android.newspaper.newses.NewsesContract
 import me.cafecode.android.newspaper.newses.NewsesPresenter
 import org.junit.Before
+import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentCaptor
-import org.mockito.Captor
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
 import utils.ReadJsonUtils
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.android.plugins.RxAndroidPlugins
+
 
 @RunWith(MockitoJUnitRunner::class)
 class NewsesPresenterTest {
@@ -31,11 +32,27 @@ class NewsesPresenterTest {
     @Mock
     lateinit var mView: NewsesContract.View
 
-    @Captor
-    var mLoadNewsesCallbackCaptor: ArgumentCaptor<LoadNewsesCallback>? = null
+    companion object {
+
+        @BeforeClass
+        @JvmStatic
+        fun setUpClass() {
+            // Override the default "out of the box" AndroidSchedulers.mainThread() Scheduler
+            //
+            // This is necessary here because otherwise if the static initialization block in AndroidSchedulers
+            // is executed before this, then the Android SDK dependent version will be provided instead.
+            //
+            // This would cause a java.lang.ExceptionInInitializerError when running the test as a
+            // Java JUnit test as any attempt to resolve the default underlying implementation of the
+            // AndroidSchedulers.mainThread() will fail as it relies on unavailable Android dependencies.
+            RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
+        }
+
+    }
 
     @Before
     fun setUp() {
+
         mPresenter = NewsesPresenter(mRepository, mView)
     }
 

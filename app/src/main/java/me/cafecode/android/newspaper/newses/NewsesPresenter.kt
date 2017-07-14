@@ -1,5 +1,7 @@
 package me.cafecode.android.newspaper.newses
 
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import me.cafecode.android.newspaper.data.NewsRepository
 import javax.inject.Inject
 
@@ -19,6 +21,8 @@ class NewsesPresenter @Inject constructor(val repository: NewsRepository, val vi
         view.showProgressView(true)
 
         repository.loadNewses()
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { newses ->
                             view.showNewses(newses)

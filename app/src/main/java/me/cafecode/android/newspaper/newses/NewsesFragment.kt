@@ -40,7 +40,9 @@ class NewsesFragment : Fragment(), NewsesContract.View {
 
         progressBar = rootView.findViewById(R.id.progress_bar)
         listView = rootView.findViewById(R.id.news_list)
-        adapter = NewsAdapter(null)
+        adapter = NewsAdapter(null) { news ->
+            Log.i("News", news.title)
+        }
         listView.adapter = adapter
         listView.layoutManager = LinearLayoutManager(context)
         return rootView
@@ -74,7 +76,8 @@ class NewsesFragment : Fragment(), NewsesContract.View {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
-    class NewsAdapter(var newsList: List<News>?) : RecyclerView.Adapter<NewsAdapter
+    class NewsAdapter(var newsList: List<News>?, val listener: (News) -> Unit) : RecyclerView
+    .Adapter<NewsAdapter
     .NewsViewHolder>() {
 
         override fun getItemCount(): Int {
@@ -89,16 +92,21 @@ class NewsesFragment : Fragment(), NewsesContract.View {
 
         override fun onBindViewHolder(holder: NewsViewHolder?, position: Int) {
             val news = newsList!![position]
-            holder!!.bind(news)
+            holder!!.bind(news, listener)
         }
 
         class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-            fun bind(news: News) {
+            fun bind(news: News, listener: (News) -> Unit) {
                 itemView.newsTitle.text = news.title
+
+                // Load image
                 Glide.with(itemView)
                         .load(news.urlToImage)
                         .into(itemView.newsImage)
+
+                // Click listener
+                itemView.setOnClickListener { view -> listener(news) }
             }
 
         }

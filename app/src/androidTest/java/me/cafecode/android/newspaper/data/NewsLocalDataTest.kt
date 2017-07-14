@@ -40,7 +40,9 @@ class NewsLocalDataTest {
     @Test
     fun loadNewses_whenLoadNewsesThenReturnNewses() {
         // Give
-        database.newsDao().saveNews(newsesResponse.newses)
+        for (news in newsesResponse.newses) {
+            database.newsDao().insertNews(news)
+        }
 
         // When
         val actualNewses = localData.loadNewses()
@@ -54,7 +56,9 @@ class NewsLocalDataTest {
         // Give
 
         // When
-        localData.saveNewses(newsesResponse.newses)
+        for (news in newsesResponse.newses) {
+            database.newsDao().insertNews(news)
+        }
 
         // Then
         Assert.assertEquals(newsesResponse.newses.size, database.newsDao().news.size)

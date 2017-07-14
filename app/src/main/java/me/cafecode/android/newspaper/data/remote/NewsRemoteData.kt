@@ -33,8 +33,6 @@ class NewsRemoteData(baseUrl: String) : NewsRemoteDataSource {
 
     override fun loadNewses(): Observable<List<News>> {
         return mApiService.getNewses()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .flatMap { newsesResponse -> Observable.just(newsesResponse.newses) }
     }
 
