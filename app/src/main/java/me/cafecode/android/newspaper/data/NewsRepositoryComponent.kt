@@ -1,6 +1,8 @@
 package me.cafecode.android.newspaper.data
 
 import dagger.Component
+import me.cafecode.android.newspaper.injection.AppModule
+import me.cafecode.android.newspaper.util.BaseSchedulerProvider
 import javax.inject.Singleton
 
 /**
@@ -13,9 +15,11 @@ import javax.inject.Singleton
  */
 
 @Singleton
-@Component(modules = arrayOf(NewsRepositoryModule::class))
+@Component(modules = arrayOf(NewsRepositoryModule::class, AppModule::class))
 interface NewsRepositoryComponent {
 
-    fun getNewsRepository() : NewsRepository
+    fun getNewsRepository(): NewsRepository
+
+    fun getScheduleProvider(): BaseSchedulerProvider
 
 }

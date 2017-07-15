@@ -16,6 +16,7 @@ import org.mockito.junit.MockitoJUnitRunner
 import utils.ReadJsonUtils
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.android.plugins.RxAndroidPlugins
+import me.cafecode.android.newspaper.util.ImmediateSchedulerProvider
 
 
 @RunWith(MockitoJUnitRunner::class)
@@ -52,8 +53,8 @@ class NewsesPresenterTest {
 
     @Before
     fun setUp() {
-
-        mPresenter = NewsesPresenter(mRepository, mView)
+        val scheduleProvider = ImmediateSchedulerProvider()
+        mPresenter = NewsesPresenter(mRepository, mView, scheduleProvider)
     }
 
     @Test
@@ -80,6 +81,9 @@ class NewsesPresenterTest {
         mPresenter.loadNewses()
 
         // Then
+        verify(mView)!!.showProgressView(true)
+
+        // After load finish
         verify(mView)!!.showProgressView(false)
         verify(mView)!!.showNewses(newses)
     }

@@ -4,6 +4,7 @@ import android.app.Application
 import me.cafecode.android.newspaper.data.DaggerNewsRepositoryComponent
 import me.cafecode.android.newspaper.data.NewsRepositoryComponent
 import me.cafecode.android.newspaper.data.NewsRepositoryModule
+import me.cafecode.android.newspaper.injection.AppModule
 
 class NewspaperApplication : Application() {
 
@@ -15,6 +16,7 @@ class NewspaperApplication : Application() {
         //TODO: Inject here
         newsRepositoryComponent = DaggerNewsRepositoryComponent.builder()
                 .newsRepositoryModule(NewsRepositoryModule(this.applicationContext))
+                .appModule(AppModule())
                 .build()
     }
 

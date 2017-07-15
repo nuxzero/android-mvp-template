@@ -1,12 +1,11 @@
 package me.cafecode.android.newspaper.newses
 
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import me.cafecode.android.newspaper.data.NewsRepository
+import me.cafecode.android.newspaper.util.BaseSchedulerProvider
 import javax.inject.Inject
 
-class NewsesPresenter @Inject constructor(val repository: NewsRepository, val view: NewsesContract
-.View) : NewsesContract.Presenter {
+class NewsesPresenter @Inject constructor(val repository: NewsRepository, val view:
+NewsesContract.View, val schedulerProvider: BaseSchedulerProvider) : NewsesContract.Presenter {
 
     @Inject
     fun setupListeners() {
@@ -21,8 +20,8 @@ class NewsesPresenter @Inject constructor(val repository: NewsRepository, val vi
         view.showProgressView(true)
 
         repository.loadNewses()
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(schedulerProvider.io())
+                .observeOn(schedulerProvider.ui())
                 .subscribe(
                         { newses ->
                             view.showNewses(newses)
