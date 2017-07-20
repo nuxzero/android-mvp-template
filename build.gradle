@@ -20,7 +20,7 @@ buildscript {
         archVersion = "1.0.0-alpha3"
         gsonVersion = "2.8.1"
         kotlinVersion = "1.1.3-2"
-        gradleVersion = "3.0.0-alpha6"
+        gradleVersion = "3.0.0-alpha7"
         glideVersion = "4.0.0-RC1"
     }
     repositories {
